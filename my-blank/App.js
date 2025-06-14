@@ -5,20 +5,12 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import React, {useState} from 'react';
 
 
-const Texto=() => {
+const Texto=({style}) => {
   const [contenido,setContenido]=useState('Hola Mundo RNative')
   const actualizaTexto=()=>{setContenido('Estado actualizado del Text')};
   return(
-    <Text onPress={actualizaTexto}>{contenido}</Text>
+    <Text style={[styles.text,style]} onPress={actualizaTexto}>{contenido}</Text>
   )
-};
-
-const Boton = () => {
-  const [contenidoBoton, setContenidoBoton] = useState('Trabaja duro');
-  const actualizaBoton=()=>{setContenidoBoton('No trabaja')};
-  return (
-    <Button title={contenidoBoton} onPress={actualizaBoton}> </Button>
-  );
 };
 
 
@@ -29,10 +21,9 @@ export default function App() {
 
     <View style={styles.container}>
 
-      <Texto></Texto>
-      <Texto></Texto>
-      <Texto></Texto>
-      <Boton></Boton>
+      <Texto style={styles.blue}></Texto>
+      <Texto style={styles.red}></Texto>
+      <Texto style={styles.green}></Texto>
       <StatusBar style="auto" />
 
     </View>
@@ -45,7 +36,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'baseline',
     justifyContent: 'center',
+    flexDirection: 'row',
   },
+  text:{
+    color: 'white',
+    fontSize: 27,
+  
+  },
+
+  blue: {backgroundColor: 'blue'},
+  red: {backgroundColor: 'red'},
+  green: {backgroundColor: 'green'},
 });
+
