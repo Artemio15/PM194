@@ -9,7 +9,12 @@ const Texto=({style}) => {
   const [contenido,setContenido]=useState('Hola Mundo RNative')
   const actualizaTexto=()=>{setContenido('Estado actualizado del Text')};
   return(
-    <Text style={[styles.text,style]} onPress={actualizaTexto}>{contenido}</Text>
+    <View style={{ margin: 10 }}>
+
+      <Text style={[styles.text, style]}>{contenido}</Text>
+      <Button title="Actualizar"onPress={actualizaTexto}color="purple"accessibilityLabel="Actualizar el contenido del texto"/>
+    </View>
+
   )
 };
 
@@ -50,4 +55,3 @@ const styles = StyleSheet.create({
   red: {backgroundColor: 'red'},
   green: {backgroundColor: 'green'},
 });
-
