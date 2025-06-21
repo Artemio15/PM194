@@ -1,57 +1,103 @@
-/*Zona 1: Importaciones */
+/* Zona 1: Importaciones */
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button, TextInput, Alert, ScrollView } from 'react-native';
 
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import React, {useState} from 'react';
+/* Zona 2: Main */
+export default function App() {
+  const [nombre, setNombre] = useState('');
+  const [password, setPassword] = useState('');
+  const [comments, setComments] = useState('');
+  const [age, setAge] = useState('');
 
 
-const Texto=({style}) => {
-  const [contenido,setContenido]=useState('Hola Mundo RNative')
-  const actualizaTexto=()=>{setContenido('Estado actualizado del Text')};
-  return(
-    <View style={{ margin: 10 }}>
-
-      <Text style={[styles.text, style]}>{contenido}</Text>
-      <Button title="Actualizar"onPress={actualizaTexto}color="purple"accessibilityLabel="Actualizar el contenido del texto"/>
-    </View>
-
-  )
+  const showAlert = () => { 
+  if (nombre.trim() === '' || password.trim() === '' || age.trim() === '') {
+    window.alert('Por favor, completa todos los campos obligatorios.');
+  } else {
+    window.alert(
+      `Nombre: ${nombre}\nContraseña: ${password}\nEdad: ${age}\nComentarios: ${comments}`
+    );
+  } 
 };
 
 
-/*Zona 2: Main */
-
-export default function App() {
   return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Nombre</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Escribe tu nombre"
+        value={nombre}
+        onChangeText={setNombre}
+      />
 
-    <View style={styles.container}>
 
-      <Texto style={styles.blue}></Texto>
-      <Texto style={styles.red}></Texto>
-      <Texto style={styles.green}></Texto>
-      <StatusBar style="auto" />
+      <Text style={styles.title}>Contraseña</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Escribe tu contraseña"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry={true}
+      />
 
-    </View>
+      <Text style={styles.title}>Edad</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Escribe tu edad"
+        value={age}
+        onChangeText={setAge}
+        keyboardType="numeric"
+      />
+
+      <Text style={styles.title}>Comentarios Multilineal</Text>
+      <TextInput
+        style={[styles.input, { height: 100, textAlignVertical: 'top' }]}
+        placeholder="Escribe tus comentarios"
+        value={comments}
+        onChangeText={setComments}
+        multiline={true}
+        numberOfLines={4}
+      />
+
+      <Text style={styles.title}>Campo solo lectura</Text>
+      <TextInput
+        style={styles.input}
+        value="Este campo solo es de lectura"
+        editable={false}
+      />
+
+      <Button title="Mostrar alerta" onPress={showAlert} />
+
+
+    </ScrollView>
   );
 }
 
-
-/*Zona 3: Estetica del screen */
+/* Estilos */
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'baseline',
+    flexGrow: 1,
+    backgroundColor: '#f0f0f0',
+    alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'row',
+    padding: 20,
   },
-  text:{
-    color: 'white',
-    fontSize: 27,
-  
+  title: {
+    fontSize: 17,
+    color: '#333',
+    marginBottom: 6,
+    alignSelf: 'flex-start',
   },
-
-  blue: {backgroundColor: 'blue'},
-  red: {backgroundColor: 'red'},
-  green: {backgroundColor: 'green'},
+  input: {
+    height: 44,
+    borderColor: '#bbb',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    marginBottom: 16,
+    borderRadius: 8,
+    backgroundColor: '#fff',
+    width: '100%',
+    fontSize: 15,
+  },
 });
