@@ -1,18 +1,15 @@
 
-
-
-
 {
   "expo": {
     "name": "my-blank",
     "slug": "my-blank",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/image1.jpeg",
+    "icon": "./assets/image3.jpeg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/image1.jpeg",
+      "image": "./assets/image3.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,13 +18,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/image1.jpeg",
+        "foregroundImage": "./assets/image3.jpeg",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "favicon": "./assets/image1.jpeg"
+      "favicon": "./assets/image3.jpeg"
     },
     "plugins": [
       [
