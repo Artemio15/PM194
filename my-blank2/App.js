@@ -1,112 +1,167 @@
-import * as SplashScreen from 'expo-splash-screen';
-import { ImageBackground } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View,  Text, TextInput, Button, Alert, Switch } from 'react-native';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Modal,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 
 
 
-SplashScreen.preventAutoHideAsync();
+
+const ModalPersonalizado = ({ visible, onClose, children }) => (
+  <Modal
+    visible={visible}
+    transparent={true}
+    animationType="fade"
+    onRequestClose={onClose}
+  >
+    <View style={styles.modalBackground}>
+      <View style={styles.modalBox}>
+        {children}
+        <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+          <Text style={styles.buttonText}>CERRAR</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </Modal>
+);
+
+
+
+
+
+
 
 export default function App() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [mostrarTexto, setMostrarTexto] = useState("");
 
-  const [appReady,setAppready] = useState(false);
-
-  const [nombre, setNombre] = useState('');
-  const [email, setEmail] = useState('');
-  const [terminos, setTerminos] = useState(false)
-
-   const handleRegister = () => {
-    if (!nombre.trim() || !email.trim()) {
-      Alert.alert('Completa todos los campos');
-    } else if (!terminos) {
-      Alert.alert('Acepta términos y condiciones');
-    } else {
-      Alert.alert('Registro exitoso',`Nombre:${nombre}\nCorreo:${email}`);
-    }
+  const handleMostrar = () => {
+    setMostrarTexto(inputValue);
   };
 
-  useEffect(() => {
-    setTimeout(async () => {
-      setAppready(true);
-      await SplashScreen.hideAsync();
-    }, 2000);
-  }, []);
-
-  return(
-    <ImageBackground
-      source={require('./assets/imagen1.jpg')}
-      style={styles.background}
-      resizeMode="cover"
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.openButton}
+        onPress={() => setModalVisible(true)}
       >
-      <View style={styles.container}>
-        <Text style={styles.title}>Bienvenido a mi App</Text>
-        <Text style={styles.subtitle}>
-          {appReady ? 'Carga Completa' : 'Cargando...'}
-        </Text>
+        <Text style={styles.buttonText}>MOSTRAR MODAL</Text>
+      </TouchableOpacity>
 
-         <TextInput
-          style={styles.input}
-          placeholder="Nombre completo"
-          value={nombre}
-          onChangeText={setNombre}
-        />
+      <ModalPersonalizado
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+      >
+        <Text style={styles.modalText}>¡Este es un modal estructurado!</Text>
         <TextInput
           style={styles.input}
-          placeholder="Correo electrónico"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
+          placeholder="Escribe algo aquí..."
+          placeholderTextColor="#aaa"
+          value={inputValue}
+          onChangeText={setInputValue}
         />
-        <View style={styles.switchContainer}>
-          <Switch value={terminos} onValueChange={setTerminos} />
-          <Text style={styles.switchLabel}>Aceptar terminos y condiciones</Text>
-        </View>
-
-        <Button title="Registrarse" onPress={handleRegister} />
-      </View>  
-      </ImageBackground>
-
+        <TouchableOpacity style={styles.showButton} onPress={handleMostrar}>
+          <Text style={styles.buttonText}>MOSTRAR</Text>
+        </TouchableOpacity>
+        {mostrarTexto !== "" && (
+          <Text style={styles.resultado}>
+            Lo escrito:{" "}
+            <Text style={styles.resultadoTexto}>{mostrarTexto}</Text>
+          </Text>
+        )}
+      </ModalPersonalizado>
+    </View>
   );
 }
 
-
-// 4. Estilos simples
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
   container: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#f4f4f4",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  title: {
-    color: 'white',
-    fontSize: 32,
-    fontWeight: 'bold',
+  openButton: {
+    backgroundColor: "#2196F3",
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    borderRadius: 8,
     marginBottom: 10,
+    elevation: 2,
   },
-  subtitle: {
-    color: 'white',
-    fontSize: 18,
-  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalBox: {
+    backgroundColor: "white",
+    padding: 28,
+    borderRadius: 18,
+    width: 320,
+    alignItems: "center",
+    elevation: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
+  modalText: {
+    fontSize: 22,
+    marginBottom: 18,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#222",
+  },
   input: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 5,
-    paddingVertical: 5,
-    fontSize: 15,
-    width: '80%',
-    marginBottom: 15,
+    width: "100%",
+    borderColor: "#2196F3",
+    borderWidth: 1.5,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 16,
+    fontSize: 17,
+    backgroundColor: "#f9f9f9",
+    color: "#222",
   },
-  switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 5,
+  showButton: {
+    backgroundColor: "#4CAF50",
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    marginBottom: 14,
+    elevation: 2,
   },
-  switchLabel: {
-    color: 'white',
+  closeButton: {
+    backgroundColor: "#FF5252",
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    marginTop: 8,
+    elevation: 2,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
+    textAlign: "center",
+    letterSpacing: 1,
+  },
+  resultado: {
+    marginTop: 10,
+    fontSize: 17,
+    color: "#333",
+    textAlign: "center",
+  },
+  resultadoTexto: {
+    color: "#2196F3",
+    fontWeight: "bold",
   },
 });
