@@ -4,34 +4,21 @@
     "slug": "my-blank2",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/gif1.gif",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/gif1.gif",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/gif1.gif",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.artemioam.myblank2"
     },
-    "web": {
-      "favicon": "./assets/gif1.gif"
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "3e578649-b6e6-4348-bf8b-7250aa4993fc"
+      }
     },
-    "plugins": [
-      [
-        "expo-splash-screen",
-        {
-          
-        }
-      ]
-    ]
+    "owner": "artemioam"
   }
 }

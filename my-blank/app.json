@@ -1,15 +1,14 @@
-
 {
   "expo": {
     "name": "my-blank",
     "slug": "my-blank",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/image3.jpeg",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/image3.jpeg",
+      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,21 +17,25 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/image3.jpeg",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.artemioam.myblank"
     },
     "web": {
-      "favicon": "./assets/image3.jpeg"
+      "favicon": "./assets/icon.png"
     },
     "plugins": [
       [
         "expo-splash-screen",
-        {
-          
-        }
+        {}
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e2e81dca-2756-43d8-a294-7cf6c96cd138"
+      }
+    }
   }
 }
